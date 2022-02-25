@@ -43,6 +43,9 @@ public class WeaponComponent : MonoBehaviour
 
     protected WeaponHolder weaponHolder;
 
+    [SerializeField]
+    protected ParticleSystem firingEffect;
+
     [SerializeField] 
     public WeaponStats weaponStats;
 
@@ -54,7 +57,7 @@ public class WeaponComponent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+
     }
 
     void Awake()
@@ -91,21 +94,47 @@ public class WeaponComponent : MonoBehaviour
     {
         isFiring = false;
         CancelInvoke(nameof(FireWeapon));
+        if (firingEffect.isPlaying)
+        {
+            firingEffect.Stop();
+        }
     }
 
     protected virtual void FireWeapon()
     {
-        Debug.Log("Firing Weapon");
         weaponStats.bulletsInClip--;
     }
 
     public virtual void StartReloading()
     {
-
+        isReloading = true;
+        ReloadWeapon();
     }
 
     public virtual void StopReloading()
     {
+        isReloading = false;
+    }
 
+    protected virtual void ReloadWeapon()
+
+    {
+        if (firingEffect.isPlaying)
+        {
+            firingEffect.Stop();
+        }
+        int bulletsToReload = weaponStats.clipSize - weaponStats.totalBullets;
+        if (bulletsToReload < 0)
+        {
+            weaponStats.bulletsInClip = weaponStats.clipSize;
+            weaponStats.totalBullets -= weaponStats.clipSize;
+
+        }
+        else
+        {
+            weaponStats.bulletsInClip = weaponStats.totalBullets;
+            weaponStats.totalBullets = 0;
+
+        }
     }
 }
