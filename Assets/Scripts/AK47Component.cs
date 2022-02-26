@@ -32,7 +32,6 @@ public class AK47Component : WeaponComponent
 
                 Vector3 hitDirection = hit.point - mainCamera.transform.position;
 
-                Debug.DrawRay(mainCamera.transform.position, hitDirection.normalized * weaponStats.fireDistance, Color.red, 2);
             }
 
         }

@@ -9,15 +9,25 @@ public class MovementComponent : MonoBehaviour
     public readonly int movementYHash = Animator.StringToHash("MovementY");
     public readonly int isJumpingHash = Animator.StringToHash("IsJumping");
     public readonly int isRunningHash = Animator.StringToHash("IsRunning");
+    public readonly int AimVerticalHash = Animator.StringToHash("AimVertical");
+
 
     Animator playerAnimator;
 
     [SerializeField]
     float walkSpeed = 5;
+
     [SerializeField]
     float runSpeed = 10;
+
     [SerializeField]
     float jumpForce = 5;
+
+    [SerializeField]
+    float minXLook = 25;
+
+    [SerializeField] 
+    float maxXLook = 400;
 
     public GameObject followTarget;
 
@@ -37,6 +47,11 @@ public class MovementComponent : MonoBehaviour
         playerAnimator = GetComponent<Animator>();
         playerTransform = transform;
         playerController = GetComponent<PlayerController>();
+
+        if (!GameManager.instance.cursorActive)
+        {
+            AppEvents.InvokeMouseCursorEnable(false);
+        }
     }
     // Update is called once per frame
     void Update()
@@ -72,7 +87,7 @@ public class MovementComponent : MonoBehaviour
     public void OnLook(InputValue value)
     {
         lookInput = value.Get<Vector2>();
-
+        
         followTarget.transform.rotation *= Quaternion.AngleAxis(lookInput.x * aimSensitivity, Vector3.up);
 
         followTarget.transform.rotation *= Quaternion.AngleAxis(lookInput.y * aimSensitivity, Vector3.right);
@@ -81,13 +96,15 @@ public class MovementComponent : MonoBehaviour
         angles.z = 0;
         var angle = followTarget.transform.localEulerAngles.x;
 
-        if (angle > 180 && angle < 300)
+        print(angles);
+
+        if (angle > 200 && angle < maxXLook)
         {
-            angles.x = 300;
+            angles.x = maxXLook;
         }
-        else if (angle < 180 && angle > 70)
+        else if (angle < 180 && angle > minXLook)
         {
-            angles.x = 70;
+            angles.x = minXLook;
         }
 
         followTarget.transform.localEulerAngles = angles;
