@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Codice.Client.Commands;
 using UnityEngine;
-using UnityEngine.Experimental.GlobalIllumination;
 
 public enum WeaponType
 {

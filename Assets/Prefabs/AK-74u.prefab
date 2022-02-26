@@ -106,7 +106,7 @@ MonoBehaviour:
     bulletsInClip: 30
     clipSize: 30
     fireStartDelay: 0
-    fireRate: 0.45
+    fireRate: 0.35
     fireDistance: 500
     repeating: 1
     totalBullets: 500
