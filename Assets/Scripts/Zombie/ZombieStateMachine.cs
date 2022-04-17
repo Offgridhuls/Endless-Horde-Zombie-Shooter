@@ -27,6 +27,7 @@ public class ZombieStateMachine : MonoBehaviour
         states.Add(stateName, state);
 
     }
+
     public void RemoveState(ZombieStateType stateName)
     {
         if (!states.ContainsKey(stateName)) return;
@@ -65,6 +66,9 @@ public class ZombieStateMachine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (isRunning)
+        {
+            currentState.Update();
+        }
     }
 }

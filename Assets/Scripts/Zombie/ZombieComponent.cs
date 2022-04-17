@@ -10,19 +10,28 @@ public class ZombieComponent : MonoBehaviour
     public NavMeshAgent zombieNavMeshAgent;
     public Animator zombieAnimator;
     public ZombieStateMachine stateMachine;
-    public GameObject followTarget;
+    private GameObject followTarget;
+
+
     // Start is called before the first frame update
     private void Awake()
     {
         zombieAnimator = GetComponent<Animator>();
         zombieNavMeshAgent = GetComponent<NavMeshAgent>();
         stateMachine = GetComponent<ZombieStateMachine>();
-
+        followTarget = GameObject.FindGameObjectWithTag("Player");
         Initialize(followTarget);
     }
+
+    private void Start()
+    {
+        Initialize(followTarget);
+    }
+
     public void Initialize(GameObject _followTarget)
     {
         followTarget = _followTarget;
+
         ZombieIdleState idleState = new ZombieIdleState(this, stateMachine);
         stateMachine.AddState(ZombieStateType.Idling, idleState);
 

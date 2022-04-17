@@ -5,7 +5,7 @@ using UnityEngine;
 public class ZombieDeadState : ZombieStates
 {
     // Start is called before the first frame update
-    int movementZhash = Animator.StringToHash("MovementZ");
+    int movementZhash = Animator.StringToHash("MoveZ");
     int isDeadHash = Animator.StringToHash("isDead");
     public ZombieDeadState(ZombieComponent zombie, ZombieStateMachine zombieStateMachine) : base(zombie, zombieStateMachine)
     {

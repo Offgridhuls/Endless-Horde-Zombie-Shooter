@@ -5,7 +5,7 @@ using UnityEngine;
 public class ZombieIdleState : ZombieStates
 {
 
-    int movementZhash = Animator.StringToHash("MovementZ");
+    int movementZhash = Animator.StringToHash("MoveZ");
     public ZombieIdleState(ZombieComponent zombie, ZombieStateMachine zombieStateMachine) : base(zombie, zombieStateMachine)
     {
 
@@ -16,7 +16,7 @@ public class ZombieIdleState : ZombieStates
         base.Start();
         ownerZombie.zombieNavMeshAgent.isStopped = true;
         ownerZombie.zombieNavMeshAgent.ResetPath();
-       // ownerZombie.zombieAnimator.SetFloat(movementZhash, 0);
+        ownerZombie.zombieAnimator.SetFloat(movementZhash, 0);
     }
 
     public override void Exit()

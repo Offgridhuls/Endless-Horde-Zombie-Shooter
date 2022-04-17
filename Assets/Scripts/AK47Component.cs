@@ -30,6 +30,8 @@ public class AK47Component : WeaponComponent
             {
                 hitLocation = hit.point;
 
+                TakeDamage(hit);
+
                 Vector3 hitDirection = hit.point - mainCamera.transform.position;
 
             }
@@ -39,5 +41,11 @@ public class AK47Component : WeaponComponent
         {
             weaponHolder.StartReloading();
         }
+    }
+
+    void TakeDamage(RaycastHit hitInfo)
+    {
+        IDamagable damagable = hitInfo.collider.GetComponent<IDamagable>();
+        damagable?.TakeDamage(weaponStats.damage);
     }
 }
