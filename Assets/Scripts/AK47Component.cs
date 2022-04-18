@@ -45,7 +45,7 @@ public class AK47Component : WeaponComponent
 
     void TakeDamage(RaycastHit hitInfo)
     {
-        IDamagable damagable = hitInfo.collider.GetComponent<IDamagable>();
+        IDamagable damagable = hitInfo.collider.GetComponent<IDamagable>(); 
         damagable?.TakeDamage(weaponStats.damage);
     }
 }

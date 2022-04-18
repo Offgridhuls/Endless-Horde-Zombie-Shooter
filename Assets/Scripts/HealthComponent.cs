@@ -14,7 +14,7 @@ public class HealthComponent : MonoBehaviour , IDamagable
 
     public virtual void destroy()
     {
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 
     public virtual void TakeDamage(float damage)

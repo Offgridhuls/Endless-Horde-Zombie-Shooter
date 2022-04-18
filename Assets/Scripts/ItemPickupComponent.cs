@@ -30,10 +30,14 @@ public class ItemPickupComponent : MonoBehaviour
     private void InstantiateItem()
     {
         ItemInstance = Instantiate(pickupItem);
-        if(amount > 0)
+        if (amount > 0)
         {
             ItemInstance.SetAmount(amount);
         }
+        else
+            ItemInstance.SetAmount(pickupItem.amountValue);
+
+        ApplyMesh();
     }
 
     private void ApplyMesh()
@@ -45,6 +49,10 @@ public class ItemPickupComponent : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
+
+        InventoryComponent playerInventory = other.GetComponent<InventoryComponent>();
+
+        if (playerInventory) playerInventory.AddItem(ItemInstance, amount);
 
         Destroy(gameObject);
     }
